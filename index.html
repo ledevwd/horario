@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horário</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #msg-hours {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        #msg-status, #msg-open-close {
+            padding: 10px;
+        }
+
+        #msg-status {
+            font-size: 1.1rem;
+        }
+
+        #msg-open-close {
+            font-size: 0.9rem;
+        }
+
+        .msg-open {
+            background: #adffc5;
+        }
+
+        .msg-close {
+            background: #ffb8b8;
+        }
+    </style>
+</head>
+<body>
+    <div id="msg-hours">
+        <p id="msg-status"></p>
+        <p id="msg-open-close"></p>
+    </div>
+    <script>
+        iniDateUpdate();
+
+        function iniDateUpdate() {
+            dateUpdate();
+
+            let a = setInterval(()=> {
+                dateUpdate();
+            }, 1000);
+        }
+
+        function dateUpdate() {
+            let date = new Date();
+            let hours = date.getHours() + 4;
+            let minutes = date.getMinutes();
+            let msgStatus = document.querySelector("#msg-status");
+            let msgOpenClose = document.querySelector("#msg-open-close");
+
+            if (hours >= 1) {
+                msgStatus.textContent = "Estamos Fechado";
+                msgStatus.classList.add("msg-close");
+                msgStatus.classList.remove("msg-open");
+                msgOpenClose.textContent = "Até 7:30";
+            }
+
+            if (hours >= 7) {
+                msgStatus.textContent = "Estamos Aberto";
+                msgStatus.classList.add("msg-open");
+                msgStatus.classList.remove("msg-close");
+                msgOpenClose.textContent = "Até 12:30";
+            }
+
+            if (hours >= 12) {
+                msgStatus.textContent = "Estamos Fechado";
+                msgStatus.classList.add("msg-close");
+                msgStatus.classList.remove("msg-open");
+                msgOpenClose.textContent = "Até 13:30";
+            }
+
+            if (hours >= 13) {
+                msgStatus.textContent = "Estamos Aberto";
+                msgStatus.classList.add("msg-open");
+                msgStatus.classList.remove("msg-close");
+                msgOpenClose.textContent = "Até 18:30";
+            }
+
+            if (hours >= 18) {
+                msgStatus.textContent = "Estamos Fechado";
+                msgStatus.classList.add("msg-close");
+                msgStatus.classList.remove("msg-open");
+                msgOpenClose.textContent = "Até 7:30";
+            }
+        }
+    </script>
+</body>
+</html>
